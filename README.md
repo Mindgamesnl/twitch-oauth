@@ -3,10 +3,38 @@
 
 A one-line util to fully manage twitch oauth on MacOS, Linux and Windows.
 
-
 ## Demo
 
-[todo - add video]
+https://user-images.githubusercontent.com/10709682/189499070-ddc11e2b-31fa-46d0-b717-2fe42d48d9f8.mp4
+
+
+## Usage/Examples
+
+```go
+func main() {
+    // start login, block routine until the user finished or failed
+    user, err := twitchauth.HandleOauth(
+        "clientID",
+        "clientSecret",
+        []string{"user:read:email"}
+    )
+
+    // did the login fail, or user abort?
+    if err != nil {
+        panic(err)
+    }
+
+    // All good! print info
+    fmt.Println(
+		"Welcome! Email: " + user.Email +
+			", ID: " + user.ID +
+			", Username: " + user.Name +
+			", Display Name: " + user.ReadableName +
+			", Description: " + user.Description +
+			", Profile Image: " + user.ProfilePicture,
+	)
+}
+```
 
 
 ## FAQ
@@ -22,32 +50,3 @@ Easier error handling and code eye-candy
 #### Do I need to register my own application?
 
 Yes, you need to register your own application in the twitch developer dashboard with a redirect callback to `http://localhost:7001/redirect`
-
-
-
-## Usage/Examples
-
-```go
-func main() {
-    // start login
-    user, err := twitchauth.HandleOauth(
-        "clientID",
-        "clientSecret",
-        []string{"user:read:email"}
-    )
-
-    if err != nil {
-        panic(err)
-    }
-
-    fmt.Println(
-		"Welcome! Email: " + user.Email +
-			", ID: " + user.ID +
-			", Username: " + user.Name +
-			", Display Name: " + user.ReadableName +
-			", Description: " + user.Description +
-			", Profile Image: " + user.ProfilePicture,
-	)
-}
-```
-
