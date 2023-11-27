@@ -1,4 +1,4 @@
-module twitch-oauth
+module github.com/Mindgamesnl/twitch-oauth
 
 go 1.18
 
